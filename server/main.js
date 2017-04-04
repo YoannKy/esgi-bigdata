@@ -11,26 +11,26 @@ Meteor.startup(() => {
 
      Meteor.methods({
         checkTwitter: function () {
-          var result = {}
+
+
+            insertTweet = Meteor.bindEnvironment(function (data) {
+                 Tweets.insert(data);
+             });
             //  search twitter for all tweets containing the word 'banana'
-            //  since Nov. 11, 2011
             Twitter.get('search/tweets',
                 {
-                    q: 'banana since:2011-11-11',
-                    count: 1
+                    q: '#racist',
+                    count: 8000
                 },
                 function(err, data, response) {
-                  console.log(data);
-                }
+                  data = data.statuses;
+                  console.log(data.length);
+                  for (var i = 0; i < data.length; i++) {
+                      insertTweet(data[i]);
+                  }
+                },
             );
 
         },
     });
 });
-
-// Meteor.methods({
-//       checkTwitter: function () {
-//           this.unblock();
-//           return Meteor.http.call("GET", "http://search.twitter.com/search.json?q=perkytweets");
-//       }
-//   });
