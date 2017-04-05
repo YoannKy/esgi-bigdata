@@ -11,14 +11,14 @@ Meteor.startup(() => {
     });
 
      Meteor.methods({
-        callTwitter: function () {
+        callTwitter : function () {
 
             var insertTweet = Meteor.bindEnvironment(function (data) {
                  Tweets.insert(data);
             });
-//849370579031470082 Le monde
-// 849539610212528129 CNN
-// 849521521521569792 BCC
+            //849370579031470082 Le monde
+            // 849539610212528129 CNN
+            // 849521521521569792 BCC
             var users         = [
                 {
                     "name":"lemondefr",
@@ -66,5 +66,24 @@ Meteor.startup(() => {
 
 
         },
+        getTweetsByUser : function () {
+          var tweets = Tweets.aggregate({
+              $group :
+              {
+                  _id : "$user.screen_name",
+                  retweets: {
+                      $push:  {
+                          hashtags : "$entities.hashtags",
+                          text: "$text",
+                          id  : "$id_str",
+                          retweet_count :"$retweet_count",
+                          favorite_count : "$favorite_count",
+                      }
+                  }
+              }
+          });
+          return tweets;
+        },
+
     });
 });
