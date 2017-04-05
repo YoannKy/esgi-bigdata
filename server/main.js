@@ -13,23 +13,37 @@ Meteor.startup(() => {
      Meteor.methods({
         callTwitter: function () {
 
-            insertTweet = Meteor.bindEnvironment(function (data) {
+            var insertTweet = Meteor.bindEnvironment(function (data) {
                  Tweets.insert(data);
             });
-
-            var users         = ["lemondefr","CNN", "BBCBreaking"]
-              , lastTweetId   = 849370579031470082
-              , iterations    = new Array(15)
+//849370579031470082 Le monde
+// 849539610212528129 CNN
+// 849521521521569792 BCC
+            var users         = [
+                {
+                    "name":"lemondefr",
+                    "lastTweetId" : 849370579031470082
+                },
+                {
+                    "name":"CNN",
+                    "lastTweetId"  : 849539610212528129
+                },
+                {
+                    "name":"BBCBreaking",
+                    "lastTweetId" : 849521521521569792
+                }]
+              , lastTweetId   = 849521521521569792
+              , iterations    = new Array(16)
               , firstLoop     = true;
 
-            console.log(iterations);
-            async.eachSeries(iterations, function(iteration, iterationsCallback) {
+            var fetchTweet = function(tweet, callbackDone) {
+
                 Twitter.get('statuses/user_timeline',
                 {
-                    screen_name : 'lemondefr',
+                    screen_name : 'BBCBreaking',
                     count : 200,
                     max_id : lastTweetId,
-                    include_rts : false,
+                    include_rts : true,
                 },
                 function (err, data, response) {
                     if(firstLoop) {
@@ -41,16 +55,15 @@ Meteor.startup(() => {
                     }
 
                     lastTweetId = data[data.length-1].id_str;
-                    iterationsCallback();
+                    callbackDone();
                 });
+
+            }
+
+            async.eachSeries(iterations, fetchTweet, function(error)  {
+                console.log('all DONE');
             });
 
-            // var stream = Twitter.stream('statuses/filter', { track: ['#react']});
-            //
-            // stream.on('tweet', function (tweet) {
-            //   // console.log(tweet);
-            //   insertTweet(tweet);
-            // })
 
         },
     });
