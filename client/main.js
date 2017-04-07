@@ -229,7 +229,7 @@ function createHeatmap(medias) {
 
 
         title: {
-            text: 'Nombre de tweets envoyés par media par semaines les 2 derniers mois'
+            text: 'Nombre de tweets envoyés par media par jours les 2 derniers mois'
         },
 
         xAxis: {
@@ -463,7 +463,7 @@ function getAllTagsFromUser(media, month, containerName) {
 }
 
 Template.body.events({
-    "click .generate": function () {      
+    "click .generate": function () {
       var month = $( "#month" ).val();;
       console.log(month);
       Meteor.call('getTagsFromUser', "lemondefr", month, function(error, result){
@@ -501,4 +501,3 @@ Template.topTagCNN.onRendered(function() {
     var tweets = getAllTagsFromUser("CNN", month, "#container3");
   });
 });
-
