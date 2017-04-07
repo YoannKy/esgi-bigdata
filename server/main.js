@@ -61,7 +61,7 @@ Meteor.startup(() => {
             }
 
             async.eachSeries(iterations, fetchTweet, function(error)  {
-                console.log('all DONE');
+                console.log('Fetched all data');
             });
 
 
@@ -76,8 +76,11 @@ Meteor.startup(() => {
                           hashtags : "$entities.hashtags",
                           text: "$text",
                           id  : "$id_str",
+                          lang : "lang",
                           retweet_count :"$retweet_count",
                           favorite_count : "$favorite_count",
+                          created_at     : "$created_at",
+                          followers : "$user.followers_count"
                       }
                   }
               }

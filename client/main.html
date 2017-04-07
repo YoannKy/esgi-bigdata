@@ -4,25 +4,21 @@
 
 <body>
   <h1>Big data</h1>
-
-  <!-- {{> hello}}
-  {{> info}} -->
-  {{> Treemap}}
-
-
-
-
+  <!-- {{> generateData}} -->
+  {{> chart}}
 </body>
 
 
-<template name="Treemap">
-        <span class="huge-text">Reserved for charts</span>
-        <div id="container"></div>
+<template name="chart">
+        <div id="treemap-container"></div>
+        <div id="piedon-container"></div>
+        <div id="heatmap-container"></div>
+        <div id="spider-container"></div>
 </template>
 
-<template name="hello">
-  <!-- <button>Click Me</button> -->
-  <!-- <p>You've pressed the button {{counter}} times.</p> -->
+
+<template name="generateData">
+  <button>Génerer des données</button>
 </template>
 
 <template name="info">

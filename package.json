@@ -8,6 +8,8 @@
     "async": "^2.3.0",
     "babel-runtime": "6.18.0",
     "highcharts": "^5.0.10",
+    "highcharts-boost": "^0.1.2",
+    "highcharts-more": "^0.1.2",
     "meteor-node-stubs": "~0.2.0"
   }
 }
