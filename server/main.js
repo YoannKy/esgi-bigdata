@@ -84,6 +84,14 @@ Meteor.startup(() => {
           });
           return tweets;
         },
-
+        getTagsFromUser : function (media, month) {
+          var tweets =[];
+          tweets = Tweets.aggregate(
+              {$match : {"user.screen_name": media, "created_at": {$regex: month} } }, 
+              {$group :{_id : "$entities.hashtags.text", tagCount : {$sum : 1}}}
+          );
+       
+          return tweets;
+        }
     });
 });

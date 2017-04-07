@@ -4,20 +4,43 @@
 
 <body>
   <h1>Big data</h1>
-
   <!-- {{> hello}}
   {{> info}} -->
-  {{> Treemap}}
-
-
-
-
+  <!-- {{> Treemap}} -->
+  {{> tags}}
 </body>
 
 
 <template name="Treemap">
         <span class="huge-text">Reserved for charts</span>
         <div id="container"></div>
+</template>
+
+
+<template name="tags">
+  <select id="month">>
+    <option value="Mar" selected="selected">March</option> 
+    <option value="Apr">April</option>
+  </select>
+  <button type="button" class="generate">generate</button>
+  {{> topTag}}
+  {{> topTagCNN}}
+  {{> topTagBBC}}
+</template>
+
+<template name="topTag">
+        <span class="huge-text">Reserved for charts</span>
+        <div id="container"></div>
+</template>
+
+<template name="topTagCNN">
+        <span class="huge-text">Reserved for charts</span>
+        <div id="container3"></div>
+</template>
+
+<template name="topTagBBC">
+        <span class="huge-text">Reserved for charts</span>
+        <div id="container2"></div>
 </template>
 
 <template name="hello">
