@@ -76,7 +76,7 @@ Meteor.startup(() => {
                           hashtags : "$entities.hashtags",
                           text: "$text",
                           id  : "$id_str",
-                          lang : "lang",
+                          lang : "$lang",
                           retweet_count :"$retweet_count",
                           favorite_count : "$favorite_count",
                           created_at     : "$created_at",
